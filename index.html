@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сяючий Дім — Клінінгова компанія в Івано-Франківську</title>
+<link rel="icon" href="images/logo.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-900:#0f3d2e;
+    --green-700:#1b6e4a;
+    --green-600:#239357;
+    --green-500:#2fae68;
+    --green-100:#e8f7ee;
+    --ink:#132a22;
+    --muted:#5c6e66;
+    --paper:#ffffff;
+    --bg:#f6faf7;
+    --ring:rgba(35,147,87,.18);
+    --shadow: 0 10px 30px rgba(15,61,46,.08);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Manrope', system-ui, -apple-system, sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+  section{padding:90px 0;}
+
+  /* ===== Header ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(15,61,46,.06);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;max-width:1140px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand img{height:48px;width:auto;}
+  .brand-text{display:flex;flex-direction:column;line-height:1.1;}
+  .brand-text strong{font-size:1.05rem;font-weight:800;color:var(--green-900);}
+  .brand-text span{font-size:.72rem;color:var(--green-600);letter-spacing:.04em;text-transform:uppercase;font-weight:600;}
+  nav.links{display:flex;gap:30px;}
+  nav.links a{
+    font-weight:600;font-size:.95rem;color:var(--ink);
+    position:relative;padding:6px 0;
+  }
+  nav.links a::after{
+    content:'';position:absolute;left:0;bottom:0;height:2px;width:0;
+    background:var(--green-500);transition:width .25s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--green-600);color:#fff;
+    padding:11px 22px;border-radius:999px;font-weight:700;font-size:.9rem;
+    box-shadow:0 6px 16px var(--ring);
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .nav-cta:hover{background:var(--green-700);transform:translateY(-2px);box-shadow:0 10px 22px var(--ring);}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+  .burger span{width:24px;height:2px;background:var(--green-900);display:block;border-radius:2px;}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    padding:100px 0 110px;
+    background:
+      radial-gradient(900px 500px at 85% -10%, var(--green-100), transparent 60%),
+      linear-gradient(180deg, #fff 0%, var(--bg) 100%);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background-image: radial-gradient(circle, rgba(35,147,87,.14) 1.5px, transparent 1.5px);
+    background-size:26px 26px;
+    -webkit-mask-image: radial-gradient(600px 400px at 90% 10%, #000, transparent 70%);
+    mask-image: radial-gradient(600px 400px at 90% 10%, #000, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;
+    position:relative;z-index:1;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--green-100);color:var(--green-700);
+    padding:7px 16px;border-radius:999px;font-size:.82rem;font-weight:700;
+    letter-spacing:.02em;margin-bottom:22px;
+  }
+  .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green-500);display:inline-block;}
+  .hero h1{
+    font-size:3.1rem;font-weight:800;color:var(--green-900);
+    line-height:1.12;letter-spacing:-.02em;margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--green-600);
+    position:relative;
+  }
+  .hero p.lead{
+    font-size:1.12rem;color:var(--muted);max-width:480px;margin-bottom:34px;
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:46px;}
+  .btn-primary{
+    background:var(--green-600);color:#fff;padding:15px 30px;border-radius:999px;
+    font-weight:700;font-size:.96rem;box-shadow:0 10px 24px var(--ring);
+    border:none;cursor:pointer;transition:transform .2s ease, background .2s ease;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary:hover{background:var(--green-700);transform:translateY(-2px);}
+  .btn-ghost{
+    background:#fff;color:var(--green-800,var(--green-900));padding:15px 28px;border-radius:999px;
+    font-weight:700;font-size:.96rem;border:1.5px solid rgba(15,61,46,.12);
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--green-500);transform:translateY(-2px);}
+
+  .hero-visual{position:relative;}
+  .hero-photo{
+    border-radius:24px;overflow:hidden;box-shadow:var(--shadow);
+    aspect-ratio:4/5;position:relative;
+  }
+  .hero-photo img{width:100%;height:100%;object-fit:cover;}
+  .floating-card{
+    position:absolute;background:#fff;border-radius:16px;padding:16px 18px;
+    box-shadow:0 14px 30px rgba(15,61,46,.14);
+    display:flex;align-items:center;gap:12px;
+    animation:float 4s ease-in-out infinite;
+  }
+  .floating-card.c1{top:20px;right:-26px;}
+  .floating-card.c2{bottom:28px;left:-30px;animation-delay:1.2s;}
+  .floating-card .ic{
+    width:40px;height:40px;border-radius:12px;background:var(--green-100);
+    display:flex;align-items:center;justify-content:center;color:var(--green-600);flex-shrink:0;
+  }
+  .floating-card .ic svg{width:20px;height:20px;}
+  .floating-card strong{display:block;font-size:.95rem;color:var(--green-900);}
+  .floating-card span{font-size:.76rem;color:var(--muted);}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+  /* ===== Section heads ===== */
+  .section-head{max-width:620px;margin:0 auto 56px;text-align:center;}
+  .section-head .eyebrow{margin-bottom:16px;}
+  .section-head h2{font-size:2.3rem;font-weight:800;color:var(--green-900);letter-spacing:-.01em;margin-bottom:14px;}
+  .section-head p{color:var(--muted);font-size:1.02rem;}
+
+  /* ===== Services ===== */
+  .services{background:#fff;}
+  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .service-card{
+    background:var(--bg);border-radius:var(--radius);padding:34px 28px;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    border:1px solid transparent;
+  }
+  .service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);background:#fff;border-color:rgba(15,61,46,.06);}
+  .service-icon{
+    width:56px;height:56px;border-radius:16px;
+    background:linear-gradient(135deg,var(--green-500),var(--green-700));
+    display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:20px;
+  }
+  .service-icon svg{width:26px;height:26px;}
+  .service-card h3{font-size:1.2rem;font-weight:700;color:var(--green-900);margin-bottom:10px;}
+  .service-card p{color:var(--muted);font-size:.95rem;margin-bottom:16px;}
+  .service-card ul{list-style:none;}
+  .service-card ul li{
+    font-size:.88rem;color:var(--ink);padding:5px 0 5px 22px;position:relative;
+  }
+  .service-card ul li::before{
+    content:'✓';position:absolute;left:0;top:5px;color:var(--green-600);font-weight:800;
+  }
+
+  /* ===== Local photo strip ===== */
+  .local-strip{background:var(--bg);}
+  .local-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .local-card{
+    border-radius:var(--radius);overflow:hidden;position:relative;box-shadow:0 6px 18px rgba(15,61,46,.08);
+    aspect-ratio:4/5;
+  }
+  .local-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .local-card:hover img{transform:scale(1.06);}
+  .local-caption{
+    position:absolute;inset:0;background:linear-gradient(0deg, rgba(15,61,46,.8) 0%, rgba(15,61,46,.05) 60%);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:20px;
+  }
+  .local-caption strong{color:#fff;font-size:1rem;font-weight:700;margin-bottom:4px;}
+  .local-caption span{color:rgba(255,255,255,.8);font-size:.82rem;}
+
+  /* ===== About ===== */
+  .about{
+    background:linear-gradient(180deg,var(--bg), #fff);
+  }
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:center;}
+  .about-photo{
+    border-radius:22px;overflow:hidden;box-shadow:var(--shadow);
+    position:relative;
+  }
+  .about-photo img{width:100%;height:100%;object-fit:cover;aspect-ratio:3/4;}
+  .about-badge{
+    position:absolute;bottom:-22px;right:-22px;
+    background:var(--green-700);color:#fff;border-radius:18px;
+    padding:20px 24px;box-shadow:0 16px 30px rgba(15,61,46,.25);
+    text-align:center;min-width:120px;
+  }
+  .about-badge strong{display:block;font-size:2rem;font-weight:800;}
+  .about-badge span{font-size:.78rem;opacity:.9;}
+  .about-text h2{font-size:2.1rem;font-weight:800;color:var(--green-900);margin-bottom:18px;letter-spacing:-.01em;}
+  .about-text p{color:var(--muted);margin-bottom:16px;font-size:1.02rem;}
+  .about-values{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px;}
+  .value-item{display:flex;gap:12px;align-items:flex-start;}
+  .value-item .dot{
+    width:34px;height:34px;border-radius:10px;background:var(--green-100);color:var(--green-600);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;font-weight:800;
+  }
+  .value-item strong{display:block;font-size:.94rem;color:var(--green-900);margin-bottom:2px;}
+  .value-item span{font-size:.82rem;color:var(--muted);}
+
+  /* ===== Gallery ===== */
+  .gallery{background:#fff;}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+  }
+  .gallery-item{
+    border-radius:16px;overflow:hidden;position:relative;cursor:pointer;
+    box-shadow:0 6px 18px rgba(15,61,46,.08);
+    aspect-ratio:3/4;
+  }
+  .gallery-item img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .5s ease;
+  }
+  .gallery-item:hover img{transform:scale(1.08);}
+  .gallery-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(0deg, rgba(15,61,46,.75) 0%, rgba(15,61,46,0) 55%);
+    display:flex;align-items:flex-end;padding:18px;
+    opacity:0;transition:opacity .3s ease;
+  }
+  .gallery-item:hover .gallery-overlay{opacity:1;}
+  .gallery-overlay span{color:#fff;font-weight:700;font-size:.92rem;}
+
+  /* ===== Process ===== */
+  .process{background:var(--bg);}
+  .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative;}
+  .process-grid::before{
+    content:'';position:absolute;top:28px;left:12%;right:12%;height:2px;
+    background:repeating-linear-gradient(90deg, var(--green-500) 0 8px, transparent 8px 16px);
+    z-index:0;
+  }
+  .process-step{text-align:center;position:relative;z-index:1;}
+  .process-num{
+    width:56px;height:56px;border-radius:50%;background:#fff;border:2px solid var(--green-500);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+    font-weight:800;color:var(--green-700);font-size:1.15rem;
+    box-shadow:0 6px 16px var(--ring);
+  }
+  .process-step h4{font-size:1rem;font-weight:700;color:var(--green-900);margin-bottom:8px;}
+  .process-step p{font-size:.86rem;color:var(--muted);}
+
+  /* ===== CTA band ===== */
+  .cta-band{
+    background:linear-gradient(120deg,var(--green-700),var(--green-900));
+    border-radius:28px;margin:0 24px;padding:56px 50px;
+    display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;
+    color:#fff;position:relative;overflow:hidden;
+  }
+  .cta-band::after{
+    content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;
+    background:rgba(255,255,255,.07);
+  }
+  .cta-band h3{font-size:1.7rem;font-weight:800;margin-bottom:8px;position:relative;}
+  .cta-band p{opacity:.85;font-size:.98rem;position:relative;}
+  .cta-band .btn-primary{background:#fff;color:var(--green-800,var(--green-900));position:relative;}
+  .cta-band .btn-primary:hover{background:var(--green-100);}
+
+  /* ===== Contact ===== */
+  .contact{background:var(--bg);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;}
+  .contact-info h2{font-size:2.1rem;font-weight:800;color:var(--green-900);margin-bottom:16px;}
+  .contact-info p{color:var(--muted);margin-bottom:28px;}
+  .contact-row{display:flex;gap:14px;align-items:center;margin-bottom:18px;}
+  .contact-row .ic{
+    width:44px;height:44px;border-radius:12px;background:var(--green-100);color:var(--green-600);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .contact-row .ic svg{width:21px;height:21px;}
+  .contact-row strong{display:block;font-size:.92rem;color:var(--green-900);}
+  .contact-row span{font-size:.86rem;color:var(--muted);}
+
+  .form-card{
+    background:#fff;border-radius:var(--radius);padding:34px;box-shadow:var(--shadow);
+  }
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .form-card label{font-size:.82rem;font-weight:700;color:var(--green-900);margin-bottom:6px;display:block;}
+  .form-card input, .form-card select, .form-card textarea{
+    width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid rgba(15,61,46,.12);
+    font-family:inherit;font-size:.92rem;background:var(--bg);color:var(--ink);
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .form-card input:focus, .form-card select:focus, .form-card textarea:focus{
+    outline:none;border-color:var(--green-500);background:#fff;
+  }
+  .form-card .field{margin-bottom:14px;}
+  .form-card textarea{resize:vertical;min-height:90px;}
+  .form-submit{
+    width:100%;background:var(--green-600);color:#fff;border:none;padding:15px;border-radius:12px;
+    font-weight:700;font-size:.96rem;cursor:pointer;transition:background .2s ease, transform .2s ease;
+    margin-top:6px;
+  }
+  .form-submit:hover{background:var(--green-700);transform:translateY(-2px);}
+  .form-note{font-size:.78rem;color:var(--muted);text-align:center;margin-top:12px;}
+  .form-success{
+    display:none;text-align:center;padding:30px 10px;
+  }
+  .form-success .check{
+    width:58px;height:58px;border-radius:50%;background:var(--green-100);color:var(--green-600);
+    display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 14px;
+  }
+  .form-success strong{display:block;font-size:1.1rem;color:var(--green-900);margin-bottom:6px;}
+  .form-success span{font-size:.88rem;color:var(--muted);}
+
+  /* ===== Footer ===== */
+  footer{background:var(--green-900);color:#fff;padding:60px 0 24px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px;}
+  .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .footer-brand img{height:42px;filter:brightness(0) invert(1);}
+  .footer-brand strong{font-size:1.05rem;font-weight:800;}
+  footer .col p, footer .col a{color:rgba(255,255,255,.65);font-size:.88rem;}
+  footer .col h5{font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px;color:rgba(255,255,255,.9);}
+  footer .col a{display:block;margin-bottom:10px;transition:color .2s ease;}
+  footer .col a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,.1);padding-top:22px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    font-size:.82rem;color:rgba(255,255,255,.5);
+  }
+  .socials{display:flex;gap:10px;}
+  .socials a{
+    width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);
+    display:flex;align-items:center;justify-content:center;font-size:.9rem;
+    transition:background .2s ease;
+  }
+  .socials a:hover{background:var(--green-600);}
+
+  /* ===== Lightbox ===== */
+  .lightbox{
+    position:fixed;inset:0;background:rgba(10,25,18,.92);z-index:200;
+    display:none;align-items:center;justify-content:center;padding:30px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:min(900px,92vw);max-height:85vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+  .lightbox-close{
+    position:absolute;top:26px;right:30px;width:44px;height:44px;border-radius:50%;
+    background:rgba(255,255,255,.1);color:#fff;border:none;font-size:1.3rem;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:background .2s ease;
+  }
+  .lightbox-close:hover{background:rgba(255,255,255,.2);}
+
+  /* ===== Reveal animation ===== */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ===== Responsive ===== */
+  @media (max-width:960px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{order:-1;max-width:420px;margin:0 auto;}
+    .service-grid{grid-template-columns:repeat(2,1fr);}
+    .local-grid{grid-template-columns:repeat(2,1fr);}
+    .about-grid{grid-template-columns:1fr;}
+    .process-grid{grid-template-columns:repeat(2,1fr);row-gap:40px;}
+    .process-grid::before{display:none;}
+    .contact-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:720px){
+    nav.links{display:none;}
+    .burger{display:flex;}
+    .hero h1{font-size:2.2rem;}
+    section{padding:64px 0;}
+    .service-grid{grid-template-columns:1fr;}
+    .local-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+    .form-row{grid-template-columns:1fr;}
+    .cta-band{flex-direction:column;text-align:center;padding:40px 26px;}
+    .footer-grid{grid-template-columns:1fr;gap:28px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header>
+  <div class="nav">
+    <a href="#top" class="brand">
+      <img src="images/logo.png" alt="Сяючий Дім логотип">
+      <div class="brand-text">
+        <strong>Сяючий Дім</strong>
+        <span>Клінінг в Івано-Франківську</span>
+      </div>
+    </a>
+    <nav class="links">
+      <a href="#services">Послуги</a>
+      <a href="#about">Про нас</a>
+      <a href="#gallery">Роботи</a>
+      <a href="#process">Як працюємо</a>
+      <a href="#contact">Контакти</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Замовити прибирання</a>
+    <button class="burger" id="burgerBtn" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section id="top" class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal in">
+      <span class="eyebrow">Клінінгова компанія в Івано-Франківську</span>
+      <h1>Прибирання квартир, офісів<br> та <em>миття вікон</em> в Івано-Франківську</h1>
+      <p class="lead">Команда «Сяючий Дім» прибирає квартири, офіси та комерційні приміщення по всьому Івано-Франківську. Ви відпочиваєте, ми створюємо бездоганну чистоту.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Залишити заявку →</a>
+        <a href="#gallery" class="btn-ghost">Переглянути роботи</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal in">
+      <div class="hero-photo">
+        <img src="images/work1.png" alt="Миття вікон фасаду в Івано-Франківську">
+      </div>
+      <div class="floating-card c1">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4L12 2z"/><path d="M19 15l.8 2.3L22 18l-2.2.7L19 21l-.8-2.3L16 18l2.2-.7L19 15z"/></svg>
+        </div>
+        <div><strong>Без розводів</strong><span>Гарантія якості</span></div>
+      </div>
+      <div class="floating-card c2">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 4 5 7 5 10a5 5 0 0 1-10 0c0-3 2-6 5-10z"/></svg>
+        </div>
+        <div><strong>Екозасоби</strong><span>Безпечно для сім'ї</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Services ===== -->
+<section id="services" class="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Наші послуги</span>
+      <h2>Чистота у кожному куточку Івано-Франківська</h2>
+      <p>Обираєте простір — ми підбираємо програму прибирання, яка підходить саме йому.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/><path d="M9 20v-6h6v6"/></svg>
+        </div>
+        <h3>Прибирання квартир</h3>
+        <p>Генеральне або підтримуюче прибирання житла будь-якої площі у всіх районах Івано-Франківська.</p>
+        <ul>
+          <li>Вологе та суха чистка</li>
+          <li>Кухня, санвузол, кімнати</li>
+          <li>Прибирання після ремонту</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 21v-4h6v4M9 7h.01M9 11h.01M9 15h.01M15 7h.01M15 11h.01M15 15h.01"/></svg>
+        </div>
+        <h3>Прибирання офісів</h3>
+        <p>Регулярне обслуговування офісних і комерційних приміщень у бізнес-центрах міста.</p>
+        <ul>
+          <li>Щоденне або щотижневе</li>
+          <li>Санвузли та кухні</li>
+          <li>Дезінфекція поверхонь</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3v18M3 12h18"/></svg>
+        </div>
+        <h3>Миття вікон</h3>
+        <p>Миття вікон, вітрин і фасадів без розводів, у тому числі на висоті.</p>
+        <ul>
+          <li>Вікна та балкони</li>
+          <li>Вітрини магазинів</li>
+          <li>Фасадне скління</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4L12 2z"/><path d="M4.5 18l.6 1.8L7 20.4l-1.9.7L4.5 23l-.6-1.9L2 20.4l1.9-.6.6-1.8z"/></svg>
+        </div>
+        <h3>Генеральне прибирання</h3>
+        <p>Глибока чистка усіх поверхонь, техніки та важкодоступних місць.</p>
+        <ul>
+          <li>Миття меблів та техніки</li>
+          <li>Чистка плінтусів, стель</li>
+          <li>Видалення складних плям</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16l-1.5 9a2 2 0 0 1-2 2H7.5a2 2 0 0 1-2-2L4 10z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>
+        </div>
+        <h3>Хімчистка та прання</h3>
+        <p>Професійна чистка м'яких меблів, килимів і текстилю.</p>
+        <ul>
+          <li>Дивани та крісла</li>
+          <li>Килими та матраци</li>
+          <li>Видалення запахів</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg>
+        </div>
+        <h3>Прибирання після ремонту</h3>
+        <p>Повне прибирання будівельного пилу та бруду після ремонтних робіт.</p>
+        <ul>
+          <li>Видалення будівельного пилу</li>
+          <li>Миття вікон і підлог</li>
+          <li>Вивезення сміття</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Local photo strip ===== -->
+<section class="local-strip">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Наша робота в місті</span>
+      <h2>Прибираємо по всьому Івано-Франківську</h2>
+      <p>Працюємо в центрі міста та у всіх житлових масивах: Пасічна, Залізничний вокзал, Бам, Опришівці, Вовчинець.</p>
+    </div>
+    <div class="local-grid">
+      <div class="local-card reveal">
+        <img src="images/work1.png" alt="Миття вітражного скління офісної будівлі в Івано-Франківську">
+        <div class="local-caption"><strong>Фасадне скління</strong><span>Бізнес-центр, центр міста</span></div>
+      </div>
+      <div class="local-card reveal">
+        <img src="images/work3.png" alt="Миття вікон в офісному приміщенні">
+        <div class="local-caption"><strong>Миття вікон</strong><span>Офіс, адміністративна будівля</span></div>
+      </div>
+      <div class="local-card reveal">
+        <img src="images/work2.png" alt="Прибирання приміщення командою Сяючий Дім">
+        <div class="local-caption"><strong>Генеральне прибирання</strong><span>Новобудова, Пасічна</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== About ===== -->
+<section id="about" class="about">
+  <div class="wrap about-grid">
+    <div class="about-photo reveal">
+      <img src="images/work2.png" alt="Співробітниця компанії Сяючий Дім за роботою">
+      <div class="about-badge">
+        <strong>5+</strong>
+        <span>років досвіду</span>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <span class="eyebrow">Про компанію</span>
+      <h2>«Сяючий Дім» — клінінгова компанія в Івано-Франківську</h2>
+      <p><strong>«Сяючий Дім»</strong> — клінінгова компанія з Івано-Франківська, яка понад п'ять років допомагає мешканцям квартир та власникам офісів міста підтримувати бездоганну чистоту без зайвих турбот. Ми вважаємо, що прибирання — це не просто послуга, а турбота про комфорт і затишок кожного дому чи офісу.</p>
+      <p>Наша команда — це місцеві навчені, відповідальні та охайні фахівці, які добре знають особливості забудови Івано-Франківська — від старих будинків у центрі до нових житлових комплексів на Пасічній та Вовчинці. Ми використовуємо сучасне обладнання та якісні, безпечні для людей і домашніх улюбленців засоби для прибирання.</p>
+      <p>Місія компанії — дарувати мешканцям Івано-Франківська більше часу для важливого, беручи рутину прибирання на себе. Саме тому кожне замовлення ми виконуємо так, ніби прибираємо у власному домі.</p>
+      <div class="about-values">
+        <div class="value-item">
+          <div class="dot">✓</div>
+          <div><strong>Якість</strong><span>Перевірка кожного етапу роботи</span></div>
+        </div>
+        <div class="value-item">
+          <div class="dot">✓</div>
+          <div><strong>Чесність</strong><span>Прозорі ціни без прихованих платежів</span></div>
+        </div>
+        <div class="value-item">
+          <div class="dot">✓</div>
+          <div><strong>Дбайливість</strong><span>Безпечні еко-засоби для прибирання</span></div>
+        </div>
+        <div class="value-item">
+          <div class="dot">✓</div>
+          <div><strong>Пунктуальність</strong><span>Приїжджаємо точно у призначений час</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Gallery ===== -->
+<section id="gallery" class="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Наші роботи</span>
+      <h2>Результати, якими ми пишаємося</h2>
+      <p>Декілька фото з реальних об'єктів у Івано-Франківську, які прибирала команда «Сяючий Дім».</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal" onclick="openLightbox('images/work1.png')">
+        <img src="images/work1.png" alt="Миття фасадних вікон в Івано-Франківську">
+        <div class="gallery-overlay"><span>Миття вікон фасаду</span></div>
+      </div>
+      <div class="gallery-item reveal" onclick="openLightbox('images/work2.png')">
+        <img src="images/work2.png" alt="Прибирання офісного приміщення">
+        <div class="gallery-overlay"><span>Прибирання офісу</span></div>
+      </div>
+      <div class="gallery-item reveal" onclick="openLightbox('images/work3.png')">
+        <img src="images/work3.png" alt="Миття вікон зсередини">
+        <div class="gallery-overlay"><span>Миття вікон зсередини</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Process ===== -->
+<section id="process" class="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Як ми працюємо</span>
+      <h2>Чотири кроки до чистоти</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="process-num">1</div>
+        <h4>Заявка</h4>
+        <p>Залишаєте заявку на сайті або телефонуєте нам</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num">2</div>
+        <h4>Розрахунок</h4>
+        <p>Узгоджуємо обсяг робіт, дату та вартість</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num">3</div>
+        <h4>Прибирання</h4>
+        <p>Команда приїжджає та виконує роботу якісно</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num">4</div>
+        <h4>Результат</h4>
+        <p>Перевіряємо чистоту разом із вами</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA Band ===== -->
+<div class="wrap">
+  <div class="cta-band reveal">
+    <div>
+      <h3>Готові зробити ваш простір сяючим?</h3>
+      <p>Залиште заявку — передзвонимо протягом 15 хвилин.</p>
+    </div>
+    <a href="#contact" class="btn-primary">Замовити прибирання →</a>
+  </div>
+</div>
+
+
+<!-- ===== Contact ===== -->
+<section id="contact" class="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <span class="eyebrow">Контакти</span>
+      <h2>Залишіть заявку на прибирання в Івано-Франківську</h2>
+      <p>Заповніть форму, і наш менеджер зв'яжеться з вами для уточнення деталей та розрахунку вартості.</p>
+      <div class="contact-row">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div><strong>+38 (0342) XXX-XXX</strong><span>Щодня з 8:00 до 20:00</span></div>
+      </div>
+      <div class="contact-row">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+        </div>
+        <div><strong>info@syaychyidim.ua</strong><span>Відповідаємо протягом години</span></div>
+      </div>
+      <div class="contact-row">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div><strong>Івано-Франківськ</strong><span>Виїзд по всьому місту та передмістю</span></div>
+      </div>
+    </div>
+    <div class="form-card reveal">
+      <form id="orderForm" action="https://formspree.io/f/shininghouseif@gmail.com" method="POST">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Ім'я</label>
+            <input type="text" id="name" name="Ім'я" placeholder="Ваше ім'я" required>
+          </div>
+          <div class="field">
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" name="Телефон" placeholder="+380 __ ___ __ __" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="service">Тип послуги</label>
+          <select id="service" name="Послуга" required>
+            <option value="">Оберіть послугу</option>
+            <option>Прибирання квартири</option>
+            <option>Прибирання офісу</option>
+            <option>Миття вікон</option>
+            <option>Генеральне прибирання</option>
+            <option>Прибирання після ремонту</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Коментар</label>
+          <textarea id="message" name="Коментар" placeholder="Площа приміщення, бажана дата тощо"></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="Нова заявка з сайту Сяючий Дім">
+        <input type="text" name="_gotcha" style="display:none">
+        <button type="submit" class="form-submit" id="submitBtn">Надіслати заявку</button>
+        <p class="form-note">Натискаючи кнопку, ви погоджуєтесь з обробкою персональних даних</p>
+        <p class="form-note" id="formError" style="display:none;color:#c0392b;">Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте нам.</p>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="check">✓</div>
+        <strong>Заявку надіслано!</strong>
+        <span>Ми зв'яжемося з вами найближчим часом.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="col">
+        <div class="footer-brand">
+          <img src="images/logo.png" alt="Сяючий Дім">
+          <strong>Сяючий Дім</strong>
+        </div>
+        <p>Клінінгова компанія повного циклу в Івано-Франківську: прибирання квартир, офісів та миття вікон. Чистота, що надихає.</p>
+      </div>
+      <div class="col">
+        <h5>Послуги</h5>
+        <a href="#services">Прибирання квартир</a>
+        <a href="#services">Прибирання офісів</a>
+        <a href="#services">Миття вікон</a>
+        <a href="#services">Генеральне прибирання</a>
+      </div>
+      <div class="col">
+        <h5>Компанія</h5>
+        <a href="#about">Про нас</a>
+        <a href="#gallery">Наші роботи</a>
+        <a href="#process">Як працюємо</a>
+        <a href="#contact">Контакти</a>
+      </div>
+      <div class="col">
+        <h5>Зв'язок</h5>
+        <a href="tel:+380342000000">+38 (0342) XXX-XXX</a>
+        <a href="mailto:info@syaychyidim.ua">info@syaychyidim.ua</a>
+        <a href="#" style="margin-bottom:0;">м. Івано-Франківськ</a>
+        <div class="socials" style="margin-top:14px;">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="Viber">VB</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Сяючий Дім. Івано-Франківськ. Усі права захищено.</span>
+      <span>Чистота, що надихає</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Lightbox ===== -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="Фото роботи">
+</div>
+
+<script>
+  // Mobile menu toggle
+  const burger = document.getElementById('burgerBtn');
+  const links = document.querySelector('nav.links');
+  burger.addEventListener('click', () => {
+    if (links.style.display === 'flex') {
+      links.style.display = 'none';
+    } else {
+      links.style.display = 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'fixed';
+      links.style.top = '72px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = '#fff';
+      links.style.padding = '20px 24px';
+      links.style.boxShadow = '0 10px 20px rgba(0,0,0,.08)';
+      links.style.gap = '18px';
+    }
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('nav.links a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= 720) links.style.display = 'none';
+    });
+  });
+
+  // Lightbox
+  function openLightbox(src) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target.id === 'lightbox') closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Form submit — sends data to shininghouseif@gmail.com via Formspree
+  const form = document.getElementById('orderForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formError = document.getElementById('formError');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    formError.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Надсилаємо...';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
+        throw new Error('Submit failed');
+      }
+    } catch (err) {
+      formError.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Надіслати заявку';
+    }
+  });
+
+  // Phone mask (simple)
+  const phoneInput = document.getElementById('phone');
+  phoneInput.addEventListener('input', () => {
+    let v = phoneInput.value.replace(/\D/g, '');
+    if (v.startsWith('380')) v = v.slice(3);
+    v = v.slice(0, 9);
+    let formatted = '+380';
+    if (v.length > 0) formatted += ' ' + v.slice(0,2);
+    if (v.length > 2) formatted += ' ' + v.slice(2,5);
+    if (v.length > 5) formatted += ' ' + v.slice(5,7);
+    if (v.length > 7) formatted += ' ' + v.slice(7,9);
+    phoneInput.value = formatted;
+  });
+
+  // Header shadow on scroll
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      header.style.boxShadow = '0 4px 16px rgba(15,61,46,.06)';
+    } else {
+      header.style.boxShadow = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
